@@ -64,6 +64,6 @@ const styles = StyleSheet.create({
     width: 200,
     borderRadius: 100,
     marginBottom: 50,
-    elevation: 2,
+    elevation: 3,
   },
 });
