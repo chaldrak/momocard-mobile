@@ -15,7 +15,7 @@ const Home = () => {
           <Text style={styles.title}>MomoCard</Text>
         </View>
       </View>
-      <Link href="/auth/signin" asChild>
+      <Link href="/nfcCheck" asChild>
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>Démarrer</Text>
         </Pressable>
