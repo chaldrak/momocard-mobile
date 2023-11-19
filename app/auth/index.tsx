@@ -10,18 +10,18 @@ import {
 } from "react-native";
 import { styles } from "../../styles/signin";
 import useAuth from "../../hooks/useAuth";
+import { MTN_PREFIX } from "../../constants/config";
+import axios from "../../api";
+import { saveData } from "../../components/LocaleStorage";
 
 const Signin = () => {
   const [number, setnumber] = useState("");
-  const { loading, login } = useAuth();
+  const { sendOTP } = useAuth();
 
   const onSubmit = () => {
-    const prefix = [
-      42, 46, 50, 51, 52, 53, 54, 56, 57, 59, 61, 62, 66, 67, 69, 90, 91, 96,
-      97,
-    ];
-
-    if (prefix.includes(getPrefix()) && numberHasGoodLength()) {
+    if (getPrefix() && numberHasGoodLength() && onlyNumbers()) {
+      sendOTP(number);
+      saveData("phoneNumber", number);
       router.replace("/auth/confirm");
     } else {
       alert("Numéro invalide !");
@@ -29,12 +29,21 @@ const Signin = () => {
   };
 
   const getPrefix = () => {
-    if (number) return Number(number.slice(0, 2));
-    return 0;
+    if (number) {
+      const prefix = Number(number.slice(0, 2));
+      return MTN_PREFIX.includes(prefix);
+    }
+    return false;
   };
 
   const numberHasGoodLength = () => {
     return number.length === 8;
+  };
+
+  const onlyNumbers = () => {
+    const regex = /^\d{8}$/;
+
+    return regex.test(number);
   };
 
   return (

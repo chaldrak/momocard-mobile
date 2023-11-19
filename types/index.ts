@@ -15,6 +15,9 @@ interface AuthContextType {
   userToken: string;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setUserToken: React.Dispatch<React.SetStateAction<string>>;
+  login: (phoneNumber: string, otp: string) => void;
+  logout: () => void;
+  sendOTP: (phoneNumber: string) => void;
 }
 
 export { HeaderProps, CardTransactionProps, AuthContextType };

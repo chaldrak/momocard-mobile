@@ -26,6 +26,7 @@ import styles, {
   NOT_EMPTY_CELL_BG_COLOR,
 } from "../../styles/confirm";
 import useAuth from "../../hooks/useAuth";
+import { getData } from "../../components/LocaleStorage";
 
 const { Value, Text: AnimatedText } = Animated;
 
@@ -104,9 +105,13 @@ const CodeConfirm = () => {
 
   const { login } = useAuth();
 
-  const onSubmit = () => {
-    login();
-    router.replace("/dashboard/");
+  const onSubmit = async () => {
+    const phoneNumber = await getData("phoneNumber");
+    console.log(phoneNumber);
+    console.log(value);
+    if (phoneNumber) {
+      login(phoneNumber, value);
+    }
   };
 
   return (
