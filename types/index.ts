@@ -10,4 +10,11 @@ interface CardTransactionProps {
   description: string;
 }
 
-export { HeaderProps, CardTransactionProps };
+interface AuthContextType {
+  loading: boolean;
+  userToken: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserToken: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export { HeaderProps, CardTransactionProps, AuthContextType };

@@ -15,17 +15,14 @@ export const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   header: {
-    width: "95%",
+    height: "40%",
+    backgroundColor: COLORS.white,
+    width: "100%",
   },
   mainTitle: {
     textAlign: "center",
     fontFamily: "Gabarito",
     fontSize: 16,
-  },
-  head: {
-    height: "40%",
-    backgroundColor: COLORS.white,
-    width: "100%",
   },
   body: {
     height: "60%",
@@ -108,20 +105,5 @@ export const styles = StyleSheet.create({
     fontFamily: "Gabarito",
     fontSize: 18,
     textAlign: "center",
-  },
-  footer: {
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "row",
-  },
-  footerText: {
-    fontFamily: "Gabarito",
-    fontSize: 14,
-    color: "lightgray",
-  },
-  footerLinkText: {
-    fontFamily: "Gabarito",
-    fontSize: 14,
-    color: COLORS.yellow,
   },
 });

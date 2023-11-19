@@ -2,6 +2,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import AppNav from "../components/AppNav";
+import AuthProvider from "../context/AuthContext";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -44,10 +46,8 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(home)" options={{ headerShown: false }} />
-      <Stack.Screen name="auth" options={{ headerShown: false }} />
-      <Stack.Screen name="dashboard" options={{ headerShown: false }} />
-    </Stack>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
   );
 }

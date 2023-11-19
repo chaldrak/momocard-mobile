@@ -1,58 +1,25 @@
+import { View, Text } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import AuthRequired from "../../components/AuthRequired";
-import { Text, View } from "react-native";
+import AuthRequired from "../../../components/AuthRequired";
 import {
   AntDesign,
   Entypo,
   MaterialCommunityIcons,
   Octicons,
 } from "@expo/vector-icons";
-import { COLORS } from "../../constants/Colors";
+import { COLORS } from "../../../constants/Colors";
 
 const _layout = () => {
   return (
     <AuthRequired>
       <Tabs
-        screenOptions={
-          {
-            // tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-          }
-        }
+        screenOptions={{
+          headerStyle: { backgroundColor: COLORS.yellow },
+        }}
       >
         <Tabs.Screen
-          name="createCard"
-          options={{
-            title: "",
-            tabBarIcon: ({ focused, color }) => (
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  top: 8,
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="card-plus"
-                  size={28}
-                  color={focused ? COLORS.blue : color}
-                />
-                <Text
-                  style={{
-                    fontSize: 10,
-                    textAlign: "center",
-                    color: focused ? COLORS.blue : color,
-                  }}
-                >
-                  Créer carte
-                </Text>
-              </View>
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="sendMoney"
+          name="deposit"
           options={{
             title: "",
             tabBarIcon: ({ focused, color }) => (
@@ -75,7 +42,7 @@ const _layout = () => {
                     color: focused ? COLORS.blue : color,
                   }}
                 >
-                  Envoi
+                  Dépôt
                 </Text>
               </View>
             ),
@@ -121,7 +88,7 @@ const _layout = () => {
         />
 
         <Tabs.Screen
-          name="receiveMoney"
+          name="withdraw"
           options={{
             title: "",
             tabBarIcon: ({ focused, color }) => (
@@ -144,38 +111,7 @@ const _layout = () => {
                     color: focused ? COLORS.blue : color,
                   }}
                 >
-                  Réception
-                </Text>
-              </View>
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="history"
-          options={{
-            title: "",
-            tabBarIcon: ({ focused, color }) => (
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  top: 10,
-                }}
-              >
-                <Octicons
-                  name="history"
-                  size={24}
-                  color={focused ? COLORS.blue : color}
-                />
-                <Text
-                  style={{
-                    fontSize: 10,
-                    textAlign: "center",
-                    color: focused ? COLORS.blue : color,
-                  }}
-                >
-                  Historique
+                  Retrait
                 </Text>
               </View>
             ),
