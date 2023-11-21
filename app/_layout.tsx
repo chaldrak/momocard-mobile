@@ -23,6 +23,9 @@ export default function RootLayout() {
     Gabarito: require("../assets/fonts/Gabarito-Regular.ttf"),
     GabaritoMedium: require("../assets/fonts/Gabarito-Medium.ttf"),
     GabaritoBold: require("../assets/fonts/Gabarito-Bold.ttf"),
+    Chakra: require("../assets/fonts/ChakraPetch-Regular.ttf"),
+    ChakraMedium: require("../assets/fonts/ChakraPetch-Medium.ttf"),
+    ChakraBold: require("../assets/fonts/ChakraPetch-Bold.ttf"),
     ...FontAwesome.font,
   });
 

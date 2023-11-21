@@ -1,4 +1,4 @@
-import { Stack, router } from "expo-router";
+import { Link, Stack, router } from "expo-router";
 import Header from "../../components/Header";
 
 import {
@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   CodeField,
@@ -26,7 +26,8 @@ import styles, {
   NOT_EMPTY_CELL_BG_COLOR,
 } from "../../styles/confirm";
 import useAuth from "../../hooks/useAuth";
-import { getData } from "../../components/LocaleStorage";
+import { getData } from "../../utils/localeStorage";
+import { AntDesign } from "@expo/vector-icons";
 
 const { Value, Text: AnimatedText } = Animated;
 
@@ -54,6 +55,7 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
 
 const CodeConfirm = () => {
   const [value, setValue] = useState("");
+  const [number, setNumber] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -105,21 +107,55 @@ const CodeConfirm = () => {
 
   const { login } = useAuth();
 
+  useEffect(() => {
+    const getPhoneNumber = async () => {
+      const phoneNumber = await getData("phoneNumber");
+      setNumber(phoneNumber as string);
+    };
+    getPhoneNumber();
+  }, []);
+
   const onSubmit = async () => {
-    const phoneNumber = await getData("phoneNumber");
-    console.log(phoneNumber);
-    console.log(value);
-    if (phoneNumber) {
-      login(phoneNumber, value);
+    if (number) {
+      login(number, value);
     }
   };
 
   return (
     <SafeAreaView style={styles.root}>
-      <Header title="Confirmation" />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTitle: () => (
+            <View>
+              <Text
+                style={{
+                  fontFamily: "Gabarito",
+                  fontSize: 16,
+                }}
+              >
+                Confirmation
+              </Text>
+            </View>
+          ),
+          headerBackVisible: false,
+          headerShadowVisible: false,
+          headerTitleAlign: "center",
+          headerLeft: () => {
+            return (
+              <Link href="/auth/">
+                <AntDesign name="arrowleft" size={24} color="black" />
+              </Link>
+            );
+          },
+        }}
+      />
       <Image style={styles.icon} source={source} />
       <Text style={styles.subTitle}>
-        Veuillez entrer votre code pin pour continuer
+        Un code vous a été envoyé au +229 {number}
+      </Text>
+      <Text style={{ color: "#000", textAlign: "center" }}>
+        Veuillez entrer ce code pour continuer
       </Text>
 
       <CodeField

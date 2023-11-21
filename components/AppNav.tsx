@@ -1,17 +1,19 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 import Spinner from "react-native-loading-spinner-overlay";
 import useAuth from "../hooks/useAuth";
 
 const AppNav = () => {
-  const { loading } = useAuth();
+  const { loading, userToken } = useAuth();
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(home)" options={{ headerShown: false }} />
-        <Stack.Screen name="auth" options={{ headerShown: false }} />
-        <Stack.Screen name="dashboard" options={{ headerShown: false }} />
+        {userToken === null ? (
+          <Stack.Screen name="auth" options={{ headerShown: false }} />
+        ) : (
+          <Stack.Screen name="dashboard" options={{ headerShown: false }} />
+        )}
       </Stack>
       <Spinner
         visible={loading}

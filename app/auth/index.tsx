@@ -12,14 +12,14 @@ import { styles } from "../../styles/signin";
 import useAuth from "../../hooks/useAuth";
 import { MTN_PREFIX } from "../../constants/config";
 import axios from "../../api";
-import { saveData } from "../../components/LocaleStorage";
+import { saveData } from "../../utils/localeStorage";
 
 const Signin = () => {
   const [number, setnumber] = useState("");
   const { sendOTP } = useAuth();
 
   const onSubmit = () => {
-    if (getPrefix() && numberHasGoodLength() && onlyNumbers()) {
+    if (getPrefix() && onlyNumbers()) {
       sendOTP(number);
       saveData("phoneNumber", number);
       router.replace("/auth/confirm");
@@ -34,10 +34,6 @@ const Signin = () => {
       return MTN_PREFIX.includes(prefix);
     }
     return false;
-  };
-
-  const numberHasGoodLength = () => {
-    return number.length === 8;
   };
 
   const onlyNumbers = () => {

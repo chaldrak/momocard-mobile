@@ -34,4 +34,13 @@ const removeData = async (key: string) => {
   }
 };
 
-export { saveData, getData, removeData };
+// Retrieve data from AsyncStorage
+const clearData = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (error) {
+    console.error("Error retrieving data from AsyncStorage:", error);
+  }
+};
+
+export { saveData, getData, removeData, clearData };
