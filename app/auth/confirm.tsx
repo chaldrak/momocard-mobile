@@ -55,7 +55,6 @@ const animateCell = ({ hasValue, index, isFocused }: any) => {
 
 const CodeConfirm = () => {
   const [value, setValue] = useState("");
-  const [number, setNumber] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -105,19 +104,19 @@ const CodeConfirm = () => {
     );
   };
 
-  const { login } = useAuth();
+  const { login, setPhoneNumber, phoneNumber } = useAuth();
 
   useEffect(() => {
     const getPhoneNumber = async () => {
       const phoneNumber = await getData("phoneNumber");
-      setNumber(phoneNumber as string);
+      setPhoneNumber(phoneNumber as string);
     };
     getPhoneNumber();
   }, []);
 
   const onSubmit = async () => {
-    if (number) {
-      login(number, value);
+    if (phoneNumber) {
+      login(phoneNumber, value);
     }
   };
 
@@ -152,7 +151,7 @@ const CodeConfirm = () => {
       />
       <Image style={styles.icon} source={source} />
       <Text style={styles.subTitle}>
-        Un code vous a été envoyé au +229 {number}
+        Un code vous a été envoyé au +229 {phoneNumber}
       </Text>
       <Text style={{ color: "#000", textAlign: "center" }}>
         Veuillez entrer ce code pour continuer

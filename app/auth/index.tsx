@@ -18,10 +18,10 @@ const Signin = () => {
   const [number, setnumber] = useState("");
   const { sendOTP } = useAuth();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (getPrefix() && onlyNumbers()) {
       sendOTP(number);
-      saveData("phoneNumber", number);
+      await saveData("phoneNumber", number);
       router.replace("/auth/confirm");
     } else {
       alert("Numéro invalide !");

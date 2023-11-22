@@ -15,13 +15,31 @@ interface CardTransactionProps {
 interface AuthContextType {
   loading: boolean;
   hasPin: boolean;
-  userToken: string;
+  userToken: string | null;
+  phoneNumber: string;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserToken: React.Dispatch<React.SetStateAction<string>>;
+  setUserToken: React.Dispatch<React.SetStateAction<string | null>>;
+  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
   login: (phoneNumber: string, otp: string) => void;
-  setPin: (userId: string, userPin: string) => void;
+  setPin: (phoneNumber: string, userPin: string) => void;
   logout: () => void;
   sendOTP: (phoneNumber: string) => void;
 }
 
-export { HeaderProps, CardTransactionProps, AuthContextType };
+interface UserType {
+  _id: string;
+  phoneNumber: string;
+  userPin: string;
+  hasPin: boolean;
+  userName: string;
+  userGivenName: string;
+  userFamilyName: string;
+  userBirthdate: string;
+  userLocale: string;
+  userGender: string;
+  createdAt: string;
+  updateAt: string;
+  __v: number;
+}
+
+export type { HeaderProps, CardTransactionProps, AuthContextType, UserType };

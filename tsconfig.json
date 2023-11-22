@@ -7,5 +7,5 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts", "context/AuthContext.jsx",  ]
+    "expo-env.d.ts",  ]
 }

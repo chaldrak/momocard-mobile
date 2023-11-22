@@ -10,11 +10,15 @@ import useAuth from "../../hooks/useAuth";
 const codePin = () => {
   const [codePin, setCodePin] = useState("");
   const [codePinConfirm, setCodePinConfirm] = useState("");
-  const { setPin } = useAuth();
+  const { setPin, phoneNumber } = useAuth();
 
   const onSubmit = async () => {
     if (onlyNumbers() && accuratePin) {
-      setPin("655b495d2f6e6fa791cc96d6", codePin);
+      if (phoneNumber) {
+        setPin(phoneNumber, codePin);
+      } else {
+        console.error("User not found !");
+      }
     } else {
       alert("Code invalide !");
     }
