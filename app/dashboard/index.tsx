@@ -48,6 +48,7 @@ const Dashboard = () => {
         headers: { Authorization: `Bearer ${userToken}` },
       });
       if (res.data) {
+        console.log(res.data);
         const trans = res.data?.transactions;
         setTransactions(trans);
       }

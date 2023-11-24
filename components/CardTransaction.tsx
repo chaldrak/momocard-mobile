@@ -8,20 +8,22 @@ const CardTransaction = ({
   amount,
   createdAt,
   payeeNote,
-  type,
+  transactionType,
 }: CardTransactionProps) => {
   return (
     <View style={styles.card}>
       <View
         style={[
           styles.imageCard,
-          type === "credit" ? styles.creditBgColor : styles.debitBgColor,
+          transactionType === "credit"
+            ? styles.creditBgColor
+            : styles.debitBgColor,
         ]}
       >
         <AntDesign
-          name={type === "credit" ? "caretup" : "caretdown"}
+          name={transactionType === "credit" ? "caretup" : "caretdown"}
           size={20}
-          color={type === "credit" ? "green" : "red"}
+          color={transactionType === "credit" ? "green" : "red"}
         />
       </View>
       <View style={styles.content}>
@@ -32,10 +34,12 @@ const CardTransaction = ({
           <Text
             style={[
               styles.amount,
-              type === "credit" ? styles.debitColor : styles.creditColor,
+              transactionType === "credit"
+                ? styles.debitColor
+                : styles.creditColor,
             ]}
           >
-            {`${type === "credit" ? "+" : "-"} ${amount}`} XOF
+            {`${transactionType === "credit" ? "+" : "-"} ${amount}`} XOF
           </Text>
         </View>
         <Text style={styles.description}>{payeeNote}</Text>
