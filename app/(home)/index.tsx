@@ -9,7 +9,7 @@ const Home = () => {
     <View style={styles.container}>
       <Stack.Screen options={{ headerShown: false }} />
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={images.welcome} />
+        <Image style={styles.image} source={images.logo} />
         <View style={styles.welcome}>
           <Text style={styles.text}>Bienvenue dans</Text>
           <Text style={styles.title}>MomoCard</Text>

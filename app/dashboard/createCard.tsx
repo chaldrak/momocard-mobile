@@ -86,7 +86,7 @@ const CreateCard = () => {
       <Header title="Créez votre carte" />
 
       <View style={styles.head}>
-        <Image source={images.welcome} style={styles.bgImage} />
+        <Image source={images.card} style={styles.bgImage} />
       </View>
       <View style={styles.body}>
         <Text style={styles.description}>

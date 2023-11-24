@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     getBalance();
     getTransactions();
-  }, [userToken]);
+  }, []);
 
   const getBalance = async () => {
     setLoading(true);
