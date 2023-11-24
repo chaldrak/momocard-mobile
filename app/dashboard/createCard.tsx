@@ -90,13 +90,14 @@ const CreateCard = () => {
       </View>
       <View style={styles.body}>
         <Text style={styles.description}>
-          Veuillez scanner votre carte MoMo
+          Veuillez cliquer sur le bouton ci-dessous et rapprocher votre carte
+          MoMo
         </Text>
         <View style={styles.inputContainer}>
           <View
             style={{
               flex: 1,
-              marginTop: 20,
+              marginTop: 40,
             }}
           >
             {/* <ActivityIndicator size={"large"} color={"#fff"} /> */}
@@ -104,16 +105,22 @@ const CreateCard = () => {
             <Pressable
               style={{
                 padding: 4,
+                paddingVertical: 10,
                 backgroundColor: COLORS.yellow,
                 width: "50%",
                 marginLeft: "auto",
                 marginRight: "auto",
+                borderRadius: 5,
               }}
               onPress={writeData}
             >
-              <Text style={{ textAlign: "center" }}>Write Data</Text>
+              <Text
+                style={{ textAlign: "center", fontFamily: "GabaritoMedium" }}
+              >
+                Scanner ma carte
+              </Text>
             </Pressable>
-            <Pressable
+            {/* <Pressable
               style={{
                 padding: 4,
                 backgroundColor: COLORS.white,
@@ -125,7 +132,7 @@ const CreateCard = () => {
               onPress={readData}
             >
               <Text style={{ textAlign: "center" }}>Read Data</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </View>
