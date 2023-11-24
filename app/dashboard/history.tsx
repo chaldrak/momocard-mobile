@@ -1,32 +1,66 @@
-import { Link, Stack, router, useNavigation } from "expo-router";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, Text, View } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
 
 import { styles } from "../../styles/history";
 import Header from "../../components/Header";
-import { allTransactions, transactions } from "../../constants/data";
 import CardTransaction from "../../components/CardTransaction";
+import { CardTransactionProps } from "../../types";
+import useAuth from "../../hooks/useAuth";
+import instance from "../../api";
 
 const History = () => {
-  const [amount, setAmount] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
+  const [transactions, setTransactions] = useState<CardTransactionProps[]>([]);
+  const { user, userToken, setLoading } = useAuth();
+
+  useEffect(() => {
+    getBalance();
+    getTransactions();
+  }, [userToken]);
+
+  const getBalance = async () => {
+    setLoading(true);
+    try {
+      const res = await instance.get(`/user/get-balance/${user?.phoneNumber}`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      if (res.data) {
+        const amount = res.data?.balance;
+        setBalance(amount);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getTransactions = async () => {
+    setLoading(true);
+    try {
+      const res = await instance.get(`/transaction/history-all/${user?._id}`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      });
+      if (res.data) {
+        const trans = res.data?.transactions;
+        setTransactions(trans);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      {loading && (
-        <Spinner
-          visible={true}
-          textContent="Veuillez rapprocher votre carte"
-          textStyle={{ color: "#fff", fontWeight: "300" }}
-          overlayColor="#00000099"
-        />
-      )}
       <Header title="Historique des transactions" />
       <View style={styles.head}>
         <View style={styles.headContainer}>
           <Text style={styles.number}>Solde</Text>
-          <Text style={styles.balance}>50 000 XOF</Text>
+          <Text style={styles.balance}>
+            {balance.toLocaleString("fr-FR")} XOF
+          </Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -38,11 +72,11 @@ const History = () => {
           </View>
 
           <View style={styles.list}>
-            {transactions ? (
+            {transactions.length !== 0 ? (
               <FlatList
-                data={allTransactions}
+                data={transactions}
                 renderItem={({ item }) => <CardTransaction {...item} />}
-                keyExtractor={(item) => String(item.id)}
+                keyExtractor={(item) => String(item._id)}
               />
             ) : (
               <Text style={{ textAlign: "center", marginTop: 50 }}>

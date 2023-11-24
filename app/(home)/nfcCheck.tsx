@@ -18,7 +18,7 @@ const NfcCheck = () => {
   }, []);
 
   if (hasNFC === null) return null;
-  else if (!hasNFC) {
+  else if (hasNFC) {
     return (
       <View style={styles.wrapper}>
         <View style={styles.imageContainer}>

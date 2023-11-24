@@ -5,10 +5,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { CardTransactionProps } from "../types";
 
 const CardTransaction = ({
-  id,
   amount,
-  date,
-  description,
+  createdAt,
+  payeeNote,
   type,
 }: CardTransactionProps) => {
   return (
@@ -27,7 +26,9 @@ const CardTransaction = ({
       </View>
       <View style={styles.content}>
         <View style={styles.contentTop}>
-          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.date}>
+            {new Date(createdAt).toLocaleString("fr-FR")}
+          </Text>
           <Text
             style={[
               styles.amount,
@@ -37,7 +38,7 @@ const CardTransaction = ({
             {`${type === "credit" ? "+" : "-"} ${amount}`} XOF
           </Text>
         </View>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{payeeNote}</Text>
       </View>
     </View>
   );

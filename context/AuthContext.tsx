@@ -174,6 +174,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         loading,
         hasPin,
         setPin,
+        user,
         phoneNumber,
         setPhoneNumber,
         setLoading,
